@@ -16,8 +16,14 @@ const buttion = document.getElementById('start'),
     depositPercent = document.querySelector('.deposit-percent'),
     targetAmount = document.querySelector('.target-amount'),
     periodSelect = document.querySelector('.period-select'),
-    resultTotal = document.querySelector('.result-total');
+    resultTotal = document.querySelector('.result-total'),
 
+    additionalExpensesItem = document.getElementsByClassName('.additional_expenses-item'),
+    incomeTitle = document.getElementsByClassName('.income-title'),
+    salaryAmount = document.getElementsByClassName('.salary-amount'),
+    expensesTitle = document.getElementsByClassName(' .expenses-title'),
+    expensesItems = document.getElementsByClassName('.expenses-items'),
+    incomeItems = document.getElementsByClassName('.income-items'); 
  
 
 
@@ -37,3 +43,10 @@ const buttion = document.getElementById('start'),
     console.log('targetAmount: ', targetAmount);
     console.log('periodSelect: ', periodSelect);
     console.log('resultTotal: ', resultTotal);
+
+    console.log('additionalExpensesItem: ', additionalExpensesItem);
+    console.log('incomeTitle: ', incomeTitle);
+    console.log('salaryAmount: ', salaryAmount);
+    console.log('expensesTitle: ', expensesTitle);
+    console.log('expensesItems: ', expensesItems);
+    console.log('incomeItems: ', incomeItems);
