@@ -24,7 +24,10 @@ let start = document.getElementById('start'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
     targetAmount = document.querySelector('.target-amount'),
     incomeItems = document.querySelectorAll('.income-items'),
-    divPeriodAmount = document.querySelector('div .period-amount');
+    divPeriodAmount = document.querySelector('div .period-amount'),
+    placeHolderNamination = document.querySelectorAll('[placeholder="Наименование"]'),
+    placeHolderSum = document.querySelectorAll('[placeholder="Сумма"]'),
+    inputsAll = document.querySelectorAll('input');;
 
     // depositAmount = document.querySelector('.deposit-amount'),
     // depositPercent = document.querySelector('.deposit-percent'),
@@ -93,6 +96,8 @@ let start = document.getElementById('start'),
         },
         addExpensesBlock: function(){
             let  cloneExpensesItem = expensesItems[0].cloneNode(true);
+            cloneExpensesItem.querySelector('.expenses-title').value = '';  
+            cloneExpensesItem.querySelector('.expenses-amount').value = '';  
             expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesplus);
             expensesItems = document.querySelectorAll('.expenses-items');
 
@@ -102,6 +107,8 @@ let start = document.getElementById('start'),
         },
         addIncomeBlock : function(){
             let  cloneIncomeItem = incomeItems[0].cloneNode(true);
+            cloneIncomeItem.querySelector('.income-title').value = '';  
+            cloneIncomeItem.querySelector('.income-amount').value = '';  
             incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
             incomeItems = document.querySelectorAll('.income-items');
 
@@ -195,6 +202,30 @@ let start = document.getElementById('start'),
         } ,
         calcPeriod: function(){
             return appData.budgetMonth * periodSelect.value;
+        },
+        chekNamField : function(){
+    
+        const matchResult = this.value.match(/[а-я]|[А-Я]|[-.?!)(,:;]|[ ]/g);
+        
+        if (!matchResult) {
+            this.value = '';
+        } else if (prevLength !==0 && prevLength === matchResult.length){
+            this.value = currentValue;
+        } else if (matchResult !== null) {
+        prevLength = matchResult.length;}
+        currentValue = this.value;
+        },
+        chekSumField : function(){
+    
+        const matchResult = this.value.match(/[0-9]/g);
+        
+        if (!matchResult) {
+            this.value = '';
+        } else if (prevLength !==0 && prevLength === matchResult.length){
+            this.value = currentValue;
+        } else if (matchResult !== null) {
+        prevLength = matchResult.length;}
+        currentValue = this.value;
         }
     };
 
@@ -211,11 +242,35 @@ let start = document.getElementById('start'),
     });
     
     salaryAmount.addEventListener('input', function(){
-        start.disabled = false;
+        if (start.disabled === true){
+        start.disabled = false;}
+        else if (salaryAmount.value === ''){
+        start.disabled = true;
+        }
     });
 
-  
-
-    
-        
+    let prevLength = 0,
+    currentValue;    
       
+    for (var i = 0; i < placeHolderNamination.length; i++) {
+        placeHolderNamination[i].addEventListener('input', appData.chekNamField);
+    }
+   
+
+    for (var i = 0; i < placeHolderSum.length; i++) {
+        placeHolderSum[i].addEventListener('input', appData.chekSumField);
+    }
+   
+    function handle(event) {
+        if (event.target.tagName === 'INPUT') {
+          prevLength = 0,
+          currentValue = null;
+        }
+      }
+      
+    for (var i = 0; i < inputsAll.length; i++) {
+        inputsAll[i].addEventListener('mouseout', handle);
+    }
+
+
+          
