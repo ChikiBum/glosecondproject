@@ -238,10 +238,13 @@ let start = document.getElementById('start'),
             start.setAttribute('style', 'display: block;');
             cancel.setAttribute('style', 'display: none;');
 
+            
+            this.clearAppdataValue();
             this.resetIncomeBlock();
             this.resetExpensesBlock();
             this.enableField();
             this.cleanFields();
+            
         },
         resetIncomeBlock : function(){
           
@@ -292,6 +295,20 @@ let start = document.getElementById('start'),
             for (let key of additionalIncomeItem){
                 key.value = '';
             }
+        },
+        clearAppdataValue: function(){
+            this.budget = 0;
+            this.budgetDay = 0;
+            this.budgetMonth = 0;
+            this.income = {};
+            this.incomeMonth = 0;
+            this.addIncome = [];
+            this.expenses = {};
+            this.addExpenses = [];
+            this.expensesMonth = 0;
+            this.deposit = false;
+            this.percentDeposit = 0;
+            this.moneyDeposit = 0;
         }
     };
 
@@ -344,4 +361,3 @@ let start = document.getElementById('start'),
 
     cancel.addEventListener('click', cancelContext);
 
-    console.log(incomeItems);
