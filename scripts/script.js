@@ -31,8 +31,7 @@ let start = document.getElementById('start'),
     inputTypeText= document.querySelectorAll('[type="text"]'),
     inputsAll = document.querySelectorAll('input'),
     incomeBlock = document.getElementsByClassName('income'),
-    expensesBlock = document.getElementsByClassName('expenses'),
-    depositCheckmark = document.getElementsByClassName('deposit-checkmark');
+    expensesBlock = document.getElementsByClassName('expenses');
 
     // depositAmount = document.querySelector('.deposit-amount'),
     // depositPercent = document.querySelector('.deposit-percent'),
@@ -333,22 +332,17 @@ let start = document.getElementById('start'),
             this.moneyDeposit = 0;
         }
 
-       
-    }
+        eventsListeners() {
+        start.addEventListener('click', this.start.bind(this));
 
-      const appData = new AppData();
+    expensesplus.addEventListener('click', this.addExpensesBlock);
 
-    AppData.prototype.eventsListeners = function(){
-        start.addEventListener('click', appData.start.bind(appData));
-
-    expensesplus.addEventListener('click', appData.addExpensesBlock);
-
-    incomePlus.addEventListener('click', appData.addIncomeBlock);
+    incomePlus.addEventListener('click', this.addIncomeBlock);
 
     periodSelect.addEventListener('change', function(){
         divPeriodAmount.textContent = periodSelect.value;
         // periodSelect.setAttribute('value', periodSelect.value);
-        incomePeriodValue.value = appData.calcPeriod();
+        incomePeriodValue.value = this.calcPeriod();
     });
     
     salaryAmount.addEventListener('input', function(){
@@ -360,12 +354,12 @@ let start = document.getElementById('start'),
     });
       
     for (var i = 0; i < placeHolderNamination.length; i++) {
-        placeHolderNamination[i].addEventListener('input', appData.chekNamField);
+        placeHolderNamination[i].addEventListener('input', this.chekNamField);
     }
    
 
     for (var i = 0; i < placeHolderSum.length; i++) {
-        placeHolderSum[i].addEventListener('input', appData.chekSumField);
+        placeHolderSum[i].addEventListener('input', this.chekSumField);
     }
    
     function handle(event) {
@@ -379,10 +373,13 @@ let start = document.getElementById('start'),
         inputsAll[i].addEventListener('mouseout', handle);
     }
 
-    const cancelContext = appData.cancel.bind(appData);
+    const cancelContext = this.cancel.bind(this);
 
     cancel.addEventListener('click', cancelContext);
-    };
+    }
+}
+
+    const appData = new AppData();
 
     let prevLength = 0,
     currentValue;    
